@@ -36,6 +36,13 @@ p {
     background: transparent;
     border: none;
 }
+.footer_logo{
+    
+    width: 262px;
+    height: 28px;
+    background: transparent;
+    border: none;
+}
 .menu ul{
     margin: 0;
     padding: 0;
@@ -198,6 +205,17 @@ margin-top: 32px;
     padding: 10px 16px;
     display: flex;
     justify-content: center;
+}
+.footer__nav_link{
+    text-decoration: none;
+    color: white;
+}
+.footer__nav_link + .footer__nav_link{
+    margin-left: 20px;
+}
+
+.footer {
+   
 }
 
 
