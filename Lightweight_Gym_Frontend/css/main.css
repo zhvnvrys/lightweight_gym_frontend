@@ -206,17 +206,7 @@ margin-top: 32px;
     display: flex;
     justify-content: center;
 }
-.footer__nav_link{
-    text-decoration: none;
-    color: white;
-}
-.footer__nav_link + .footer__nav_link{
-    margin-left: 20px;
-}
 
-.footer {
-   
-}
 
 
 
