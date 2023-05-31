@@ -41,47 +41,59 @@
         </div>
       </header>
       <main class="main_signup_form">
-        <form class="row g-3 needs-validation" novalidate>
+        <div id="signupForm">
+          <form class="row g-3 needs-validation" novalidate>
             <div class="col-md-4 position-relative">
-              <label for="validationTooltip01" class="form-label">First name</label>
-              <input type="text" class="form-control" id="validationTooltip01" value="Mark" required>
+              <label for="firstNameInput" class="form-label">First name</label>
+              <input type="text" class="form-control" id="firstNameInput" required>
               <div class="valid-tooltip">
                 Looks good!
               </div>
             </div>
             <div class="col-md-4 position-relative">
-              <label for="validationTooltip02" class="form-label">Last name</label>
-              <input type="text" class="form-control" id="validationTooltip02" value="Otto" required>
+              <label for="lastNameInput" class="form-label">Last name</label>
+              <input type="text" class="form-control" id="lastNameInput" required>
               <div class="valid-tooltip">
                 Looks good!
               </div>
             </div>
-            <div class="mb-3 col-md-12" >
-                <label for="exampleFormControlInput1" class="form-label"
-                  >Email address</label
-                >
-                <input
-                  type="email"
-                  class="form-control"
-                  id="exampleFormControlInput1"
-                  placeholder="name@example.com"
-                />
-        
-                <label for="inputPassword5" class="form-label">Password</label>
-                <input
-                  type="password"
-                  id="inputPassword5"
-                  class="form-control "
-                  aria-labelledby="passwordHelpBlock"
-                />
-                <div id="passwordHelpBlock" class="form-text">
-                  Your password must at least be 8 characters long and consists of uppercase, lowercase, and a symbol.
-                </div>
+            <div class="mb-3 col-md-12">
+              <label for="emailInput" class="form-label">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="emailInput"
+                placeholder="name@example.com"
+                required
+              />
+      
+              <label for="passwordInput" class="form-label">Password</label>
+              <input
+                type="password"
+                id="passwordInput"
+                class="form-control"
+                aria-labelledby="passwordHelpBlock"
+                required
+              />
+      
+              <label for="confirmPasswordInput" class="form-label">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPasswordInput"
+                class="form-control"
+                required
+              />
+              <div id="passwordHelpBlock" class="form-text">
+                Your password must be at least 8 characters long and include uppercase, lowercase, and a symbol.
               </div>
+            </div>
             <div class="col-12">
               <button class="btn btn-primary" type="submit">Submit form</button>
             </div>
           </form>
+        </div>
       </main>
+      
+      <script src="script.js"></script>
 </body>
 </html>
