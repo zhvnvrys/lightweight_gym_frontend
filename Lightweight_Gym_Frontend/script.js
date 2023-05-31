@@ -78,3 +78,50 @@ signUpForm?.addEventListener('submit', async (e) => {
 signUpButton?.addEventListener('click', () => {
   signUpForm.submit();
 });
+
+
+
+function formatDateTime(activityDate, finishedAt) {
+  const options = { day: 'numeric', month: 'long', year: 'numeric' };
+  const date = new Date(activityDate).toLocaleDateString(undefined, options);
+
+  return `${date}`;
+}
+
+function formatHours(activityDate, finishedAt) {
+
+  const startTime = new Date(finishedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const endTime = finishedAt.slice(11, 16);
+
+  return `${startTime} - ${endTime}`;
+}
+
+
+async function fetchAndDisplayActivities() {
+  try {
+    const response = await fetch('http://localhost:5296/api/Activities');
+    const activities = await response.json();
+
+    
+    const activityList = document.getElementById('activityList');
+    activities.forEach(activity => {
+      const activityHeader = document.createElement('h2');
+      activityHeader.textContent = activity.activityName;
+
+      const activityItem = document.createElement('div');
+      activityItem.classList.add('activity-item');
+      activityItem.innerHTML = `
+        <p class="activity-date">${formatDateTime(activity.activityDate, activity.finishedAt)}</p>
+        <p class="activity-hours">${formatHours(activity.activityDate, activity.finishedAt)}</p>
+        <p><strong>Trainer ID:</strong> ${activity.trainerId}</p>
+      `;
+
+      activityList.appendChild(activityHeader);
+      activityList.appendChild(activityItem);
+    });
+  } catch (error) {
+    console.error('An error occurred while fetching activities:', error);
+  }
+}
+
+fetchAndDisplayActivities();

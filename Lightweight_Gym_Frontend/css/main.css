@@ -6,7 +6,9 @@ body{
 a {
     text-decoration: none;
 }
+
 h2 {
+    color: white;
     font-size: 48px;
     font-weight: 800;
 }
@@ -164,12 +166,13 @@ margin-top: 32px;
 }
 .main__membership-box-three-price, .main__membership-box-two-price,
 .main__membership-box-one-price {
-    color: #45E57D;
+    color: white;
     margin-top: 10px;
 }
 .main__membership-box-three-text, .main__membership-box-two-text,
 .main__membership-box-one-text {
     margin-top: 20px;
+    color: white;
 }
 
 .main__membership-button {
@@ -207,7 +210,25 @@ margin-top: 32px;
     justify-content: center;
 }
 
+.activity-date {
+    font-size: 1.2em;
+}
+  
+.activity-hours {
+    font-size: 1em;
+}
 
+.center-text{
+    text-align: center;
+}
+
+.black-bg{
+    background-color: black;
+}
+
+.white-text{
+    color: white;
+}
 
 
     
