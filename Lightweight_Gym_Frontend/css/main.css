@@ -49,7 +49,7 @@ p {
     margin: 0;
     padding: 0;
     font-weight: 300;
-;
+
 }
 .nav_link{
     text-decoration: none;
@@ -65,6 +65,7 @@ p {
     border-radius: 18px;
     transition: all 0.5s ease;
     font-weight: 500;
+    
 }
 
 .nav__button--white {
@@ -204,7 +205,6 @@ margin-top: 32px;
 }
 .form-control {
     height: 46px;
-    width: 40%;
     padding: 10px 16px;
     display: flex;
     justify-content: center;
@@ -229,6 +229,19 @@ margin-top: 32px;
 .white-text{
     color: white;
 }
+
+.main_login_form, .main_signup_form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login_form, .signup_form {
+    width: 30%;
+}
+
+
 
 
     
