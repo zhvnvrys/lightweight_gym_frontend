@@ -38,6 +38,7 @@ loginButton?.addEventListener('click', () => {
   loginForm.submit();
 });
 
+const errorMessage = document.getElementById('errorMessage');
 
 signUpForm?.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -68,16 +69,41 @@ signUpForm?.addEventListener('submit', async (e) => {
       console.log('User signed up successfully:', result);
       window.location.href = 'login.html';
     } else {
-      console.error('Sign-up failed');
+      const errorData = await response.json();
+
+      let errorMessageText = '<ul>';
+
+      for (const [key, errorMessages] of Object.entries(errorData.errors)) {
+        errorMessageText += `<li>${errorMessages.join(', ')}</li>`;
+      }
+
+      errorMessageText += '</ul>';
+
+      errorMessage.innerHTML = errorMessageText;
     }
   } catch (error) {
     console.error('An error occurred during sign-up:', error);
   }
 });
 
+signUpForm?.addEventListener('input', () => {
+  errorMessage.textContent = '';
+});
+
 signUpButton?.addEventListener('click', () => {
   signUpForm.submit();
 });
+
+
+// Clear the error message when the input fields are modified
+signUpForm?.addEventListener('input', () => {
+  errorMessage.textContent = '';
+});
+
+signUpButton?.addEventListener('click', () => {
+  signUpForm.submit();
+});
+
 
 
 
