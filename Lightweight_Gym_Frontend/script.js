@@ -4,18 +4,18 @@ const loginButton = document.getElementById('loginButton');
 const signUpForm = document.getElementById('signupForm');
 const signUpButton = document.getElementById('signupButton');
 
+const errorContainer = document.getElementById('errorContainer');
+const errorMessage = document.getElementById('errorMessage');
+
 loginForm?.addEventListener('submit', async (e) => {
   e.preventDefault(); 
-
 
   const email = document.getElementById('emailInput').value;
   const password = document.getElementById('passwordInput').value;
 
-
   const signInData = { email, password };
 
   try {
-
     const response = await fetch('http://localhost:5296/api/Accounts/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -26,11 +26,17 @@ loginForm?.addEventListener('submit', async (e) => {
       const result = await response.json();
       console.log('User signed in successfully:', result);
       window.location.href = 'index-login.html';
+    } else if (response.status === 401) {
+      errorMessage.textContent = 'Invalid username or password.';
+      errorContainer.style.display = 'block';
     } else {
-      console.error('Sign-in failed');
+      errorMessage.textContent = 'An error occurred during sign-in. Please try again later.';
+      errorContainer.style.display = 'block';
     }
   } catch (error) {
     console.error('An error occurred during sign-in:', error);
+    errorMessage.textContent = 'An error occurred during sign-in.';
+    errorContainer.style.display = 'block';
   }
 });
 
@@ -38,7 +44,6 @@ loginButton?.addEventListener('click', () => {
   loginForm.submit();
 });
 
-const errorMessage = document.getElementById('errorMessage');
 
 signUpForm?.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -73,19 +78,34 @@ signUpForm?.addEventListener('submit', async (e) => {
 
       let errorMessageText = '<ul>';
 
-      for (const [key, errorMessages] of Object.entries(errorData.errors)) {
-        errorMessageText += `<li>${errorMessages.join(', ')}</li>`;
+      if (errorData && errorData.errors && errorData.errors.Email && errorData.errors.Email.includes('Email address is already in use.')) {
+        errorMessageText += '<li>Email address is already in use.</li>';
+      } else {
+        for (const [key, errorMessages] of Object.entries(errorData.errors)) {
+          errorMessageText += `<li>${errorMessages.join(', ')}</li>`;
+        }
       }
 
       errorMessageText += '</ul>';
-
       errorMessage.innerHTML = errorMessageText;
+      errorContainer.style.display = 'block'; // Show the error container
     }
   } catch (error) {
     console.error('An error occurred during sign-up:', error);
+    errorMessage.innerHTML = 'An error occurred during sign-up. Please try again later.';
+    errorContainer.style.display = 'block'; // Show the error container
   }
 });
 
+
+
+// Clear the error message and hide the error container when the input fields are modified
+signUpForm?.addEventListener('input', () => {
+  errorMessage.innerHTML = '';
+  errorContainer.style.display = 'none';
+});
+
+
 signUpForm?.addEventListener('input', () => {
   errorMessage.textContent = '';
 });
@@ -93,17 +113,6 @@ signUpForm?.addEventListener('input', () => {
 signUpButton?.addEventListener('click', () => {
   signUpForm.submit();
 });
-
-
-// Clear the error message when the input fields are modified
-signUpForm?.addEventListener('input', () => {
-  errorMessage.textContent = '';
-});
-
-signUpButton?.addEventListener('click', () => {
-  signUpForm.submit();
-});
-
 
 
 
@@ -121,6 +130,7 @@ function formatHours(activityDate, finishedAt) {
 
   return `${startTime} - ${endTime}`;
 }
+
 
 
 async function fetchAndDisplayActivities() {
